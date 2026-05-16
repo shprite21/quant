@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#f8fafc" />
+  <rect x="70" y="40" width="850" height="420" fill="#ffffff" stroke="#cbd5e1" />
+  <text x="70" y="24" font-family="Arial, sans-serif" font-size="22" fill="#0f172a">Example Equity Curve</text>
+  <line x1="110" y1="420" x2="880" y2="420" stroke="#64748b" stroke-width="2" />
+  <line x1="110" y1="90" x2="110" y2="420" stroke="#64748b" stroke-width="2" />
+  <text x="115" y="440" font-family="Arial, sans-serif" font-size="12" fill="#475569">Start</text>
+  <text x="835" y="440" font-family="Arial, sans-serif" font-size="12" fill="#475569">End</text>
+  <text x="25" y="100" font-family="Arial, sans-serif" font-size="12" fill="#475569">1.40</text>
+  <text x="25" y="250" font-family="Arial, sans-serif" font-size="12" fill="#475569">1.20</text>
+  <text x="25" y="420" font-family="Arial, sans-serif" font-size="12" fill="#475569">1.00</text>
+  <polyline
+    fill="none"
+    stroke="#0f766e"
+    stroke-width="5"
+    points="110,410 170,396 230,384 290,370 350,352 410,336 470,320 530,298 590,278 650,248 710,228 770,198 830,168 880,132"
+  />
+  <polyline
+    fill="none"
+    stroke="#94a3b8"
+    stroke-width="4"
+    points="110,410 170,402 230,396 290,390 350,382 410,374 470,362 530,350 590,338 650,322 710,310 770,296 830,282 880,268"
+  />
+  <text x="730" y="110" font-family="Arial, sans-serif" font-size="14" fill="#0f766e">Strategy</text>
+  <text x="730" y="134" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Benchmark</text>
+</svg>

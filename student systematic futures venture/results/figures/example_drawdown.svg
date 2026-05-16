@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#f8fafc" />
+  <rect x="70" y="40" width="850" height="420" fill="#ffffff" stroke="#cbd5e1" />
+  <text x="70" y="24" font-family="Arial, sans-serif" font-size="22" fill="#0f172a">Example Drawdown Chart</text>
+  <line x1="110" y1="100" x2="110" y2="420" stroke="#64748b" stroke-width="2" />
+  <line x1="110" y1="260" x2="880" y2="260" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="8 8" />
+  <line x1="110" y1="420" x2="880" y2="420" stroke="#64748b" stroke-width="2" />
+  <text x="32" y="108" font-family="Arial, sans-serif" font-size="12" fill="#475569">0%</text>
+  <text x="25" y="266" font-family="Arial, sans-serif" font-size="12" fill="#475569">-10%</text>
+  <text x="25" y="424" font-family="Arial, sans-serif" font-size="12" fill="#475569">-20%</text>
+  <path
+    d="M110 160 L170 180 L230 210 L290 230 L350 240 L410 270 L470 300 L530 325 L590 310 L650 294 L710 280 L770 250 L830 220 L880 205 L880 420 L110 420 Z"
+    fill="#fecaca"
+    stroke="#b91c1c"
+    stroke-width="3"
+  />
+</svg>

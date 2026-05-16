@@ -1,0 +1,103 @@
+project:
+  name: regime-aware-derivatives-trading
+  random_seed: 42
+  base_currency: INR
+
+data:
+  spot_symbols:
+    - "^NSEI"
+    - "^NSEBANK"
+  volatility_symbol: "^INDIAVIX"
+  start_date: "2015-01-01"
+  end_date: null
+  frequency: "1d"
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+
+features:
+  lag_features_by: 1
+  annualization_factor: 252
+  momentum_windows: [5, 10, 20]
+  volatility_windows: [5, 10, 20]
+  atr_window: 14
+  rsi_window: 14
+  bollinger_window: 20
+  adx_window: 14
+
+regime_detection:
+  method: "hmm"
+  n_regimes: 3
+  covariance_type: "full"
+  n_iter: 200
+  feature_columns:
+    - daily_return
+    - rolling_volatility_20
+    - realized_volatility_20
+    - atr_percent
+    - adx
+
+signal_model:
+  task_type: "binary"
+  target_horizon: 5
+  return_threshold: 0.015
+  model_name: "xgboost"
+  feature_columns:
+    - daily_return
+    - log_return
+    - momentum_5
+    - momentum_10
+    - momentum_20
+    - rolling_volatility_5
+    - rolling_volatility_10
+    - rolling_volatility_20
+    - realized_volatility_5
+    - realized_volatility_10
+    - realized_volatility_20
+    - drawdown
+    - rsi_14
+    - macd
+    - macd_signal
+    - macd_hist
+    - atr_percent
+    - bollinger_bandwidth
+    - adx
+    - plus_di
+    - minus_di
+    - volume_change
+    - relative_volume_20
+    - trend_strength
+    - india_vix
+    - regime_id
+    - regime_probability
+    - regime_duration
+
+options_strategy:
+  bullish_probability_threshold: 0.60
+  bearish_probability_threshold: 0.40
+  high_volatility_threshold: 0.025
+  low_volatility_threshold: 0.012
+  strong_trend_threshold: 0.15
+  weak_trend_threshold: 0.03
+
+risk_management:
+  atr_multiple: 2.0
+  max_capital_at_risk: 0.02
+  max_notional_fraction: 0.25
+  minimum_contracts: 0
+
+backtest:
+  train_window: 252
+  test_window: 21
+  step_size: 21
+  allow_short: true
+  probability_threshold: 0.55
+  short_probability_threshold: 0.45
+  transaction_cost_bps: 2.5
+  slippage_bps: 1.0
+  benchmark_short_window: 20
+  benchmark_long_window: 50
+
+reporting:
+  figures_dir: "results/figures"
+  tables_dir: "results/tables"
+  reports_dir: "results/reports"

@@ -1,0 +1,5 @@
+strategy,cagr,sharpe_ratio,sortino_ratio,calmar_ratio,max_drawdown,alpha,beta,information_ratio,win_rate,profit_factor,expectancy
+regime_aware_signal,0.184,1.37,1.96,1.08,-0.171,0.062,0.84,0.71,0.53,1.31,0.0012
+buy_and_hold,0.126,0.91,1.28,0.63,-0.201,0.000,1.00,0.00,0.51,1.12,0.0008
+sma_crossover,0.097,0.78,1.09,0.69,-0.141,0.021,0.66,0.28,0.49,1.08,0.0006
+momentum,0.112,0.84,1.17,0.74,-0.151,0.028,0.71,0.33,0.50,1.11,0.0007
