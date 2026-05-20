@@ -1,223 +1,326 @@
-# Project A - Regime-Aware Multi-Strategy Backtesting System
+# Project A — Regime-Aware Multi-Strategy Backtesting System
 
-Author: Arnaav Raj
+A professional-grade quantitative research platform that combines multiple trading strategies with Hidden Markov Model (HMM) based market regime detection.
+
+---
 
 ## Overview
 
-This repository is a modular quantitative research platform that combines three systematic trading strategies with Hidden Markov Model based regime detection. The system downloads market data, engineers macro-style state features, infers hidden market regimes, reallocates capital dynamically across strategies, and produces a full backtest report with visual diagnostics.
+Financial markets behave differently under different conditions. A trend-following strategy may perform well during strong directional moves, while mean reversion or statistical arbitrage strategies may outperform during range-bound or dislocated markets.
 
-The project is designed to be portfolio-quality for:
+This project builds a regime-aware trading system that:
 
-- Quant research internship applications
-- MFE / MSFE applications
-- GitHub portfolio showcase
-- Technical interview discussion
+1. Detects hidden market regimes using a Hidden Markov Model (HMM)
+2. Runs multiple strategies simultaneously
+3. Dynamically adjusts strategy allocations based on the current regime
+4. Evaluates performance using institutional-grade risk metrics
 
-## Features
+The project is designed to showcase advanced quantitative finance, machine learning, and software engineering skills for MFE applications and quantitative research roles.
 
-- Daily market data ingestion from Yahoo Finance via `yfinance`
-- Config-driven experiment pipeline
-- Strategy library with momentum, mean reversion, and pairs trading
-- Gaussian HMM market regime detection using `hmmlearn`
-- Regime-aware dynamic strategy allocation
-- Vectorized backtesting with look-ahead protection
-- Transaction cost and turnover modeling
-- Institutional-style performance metrics
-- Matplotlib reporting and Plotly interactive dashboard export
-- Research notebooks for exploration and presentation
-- Unit tests for metrics, strategies, and backtester behavior
+---
 
-## Mathematical Foundation
+## Key Features
 
-### 1. Momentum
+### Hidden Markov Model (HMM) Regime Detection
 
-The momentum strategy uses a moving-average crossover rule:
+* Uses Gaussian HMM to infer latent market states
+* Identifies regimes such as:
 
-\[
-\text{signal}_t =
-\begin{cases}
-1, & \text{if } MA_{\text{short}, t} > MA_{\text{long}, t} \\
--1, & \text{otherwise}
-\end{cases}
-\]
+  * Bull / Trending
+  * Bear / Downtrend
+  * High Volatility
+  * Low Volatility
+* Trained on:
 
-### 2. Mean Reversion
+  * Daily returns
+  * Rolling volatility
+  * Momentum indicators
 
-For each asset, a rolling z-score is computed:
+### Trading Strategies
 
-\[
-z_t = \frac{P_t - \mu_t}{\sigma_t}
-\]
+* **Momentum Strategy** — Moving average crossover
+* **Mean Reversion Strategy** — Bollinger Band z-score signals
+* **Pairs Trading Strategy** — Cointegration-based statistical arbitrage
 
-The strategy enters long positions when \( z_t < -\theta \) and short positions when \( z_t > \theta \), then exits when the z-score normalizes.
+### Dynamic Allocation Engine
 
-### 3. Pairs Trading
+Allocates capital based on the detected regime.
 
-For a correlated pair \( (X_t, Y_t) \), the rolling hedge ratio is estimated via OLS:
+Example:
 
-\[
-Y_t = \alpha_t + \beta_t X_t + \varepsilon_t
-\]
+* Trending market → overweight Momentum
+* Sideways market → overweight Mean Reversion
+* Dislocated market → overweight Pairs Trading
 
-The spread is:
+### Backtesting Engine
 
-\[
-S_t = Y_t - \beta_t X_t
-\]
+* Vectorized backtesting
+* Position sizing
+* Portfolio aggregation
+* Transaction cost modeling
+* Benchmark comparison
 
-The strategy trades the spread based on its rolling z-score.
+### Performance Analytics
 
-### 4. Hidden Markov Model Regime Detection
+* CAGR
+* Sharpe Ratio
+* Sortino Ratio
+* Maximum Drawdown
+* Calmar Ratio
+* Volatility
+* Win Rate
 
-The latent regime process is modeled with a Gaussian Hidden Markov Model using the following feature vector:
+### Visualization
 
-- Daily return
-- 20-day rolling volatility
-- 50-day minus 200-day moving-average spread
-- 20-day momentum
+* Equity curve
+* Drawdown plot
+* Regime overlay on prices
+* Rolling Sharpe ratio
+* Strategy weight evolution
 
-The model estimates:
-
-- Hidden states
-- State probabilities
-- State transition matrix
-
-States are labeled heuristically as:
-
-- `Bull`
-- `Bear`
-- `High Volatility`
-
-### 5. Portfolio Construction
-
-Strategy capital weights are updated daily according to the inferred regime. Example mapping:
-
-- `Bull`: Momentum 70%, Mean Reversion 20%, Pairs Trading 10%
-- `Bear`: Momentum 20%, Mean Reversion 50%, Pairs Trading 30%
-- `High Volatility`: Momentum 10%, Mean Reversion 40%, Pairs Trading 50%
+---
 
 ## Repository Structure
 
 ```text
-project-a/
+regime-aware-multi-strategy-backtesting/
+│
 ├── data/
 │   ├── raw/
 │   └── processed/
-├── notebooks/
-├── src/
-│   ├── analytics/
-│   ├── backtester/
-│   ├── data/
-│   ├── regime/
-│   ├── strategies/
-│   └── utils/
+│
 ├── experiments/
-├── tests/
+│   ├── config.yaml
+│   └── run_experiment.py
+│
+├── notebooks/
+│   ├── 01_data_exploration.ipynb
+│   ├── 02_strategy_research.ipynb
+│   ├── 03_regime_detection.ipynb
+│   └── 04_results_analysis.ipynb
+│
 ├── outputs/
 │   ├── figures/
 │   └── reports/
-├── requirements.txt
-├── README.md
+│
+├── src/
+│   ├── analytics/
+│   │   ├── metrics.py
+│   │   └── plotting.py
+│   │
+│   ├── backtester/
+│   │   ├── engine.py
+│   │   └── portfolio.py
+│   │
+│   ├── data/
+│   │   ├── loader.py
+│   │   └── preprocess.py
+│   │
+│   ├── regime/
+│   │   └── hmm_regime_detector.py
+│   │
+│   ├── strategies/
+│   │   ├── base.py
+│   │   ├── momentum.py
+│   │   ├── mean_reversion.py
+│   │   └── pairs_trading.py
+│   │
+│   └── utils/
+│       └── helpers.py
+│
+├── tests/
+│   ├── test_backtester.py
+│   ├── test_metrics.py
+│   └── test_strategies.py
+│
 ├── .gitignore
+├── README.md
+├── requirements.txt
 └── setup.py
 ```
+
+---
+
+## Methodology
+
+### 1. Data Preparation
+
+Historical price data is loaded and transformed into features such as:
+
+* Log returns
+* Rolling volatility
+* Moving averages
+* Z-scores
+
+### 2. Regime Detection
+
+The HMM estimates hidden states using market features and labels each date with a regime.
+
+### 3. Signal Generation
+
+Each strategy independently generates signals:
+
+* `+1` = Long
+* `0` = Flat
+* `-1` = Short
+
+### 4. Regime-Based Allocation
+
+|          Regime | Momentum | Mean Reversion | Pairs Trading |
+| --------------: | -------: | -------------: | ------------: |
+|      Bull Trend |     0.70 |           0.20 |          0.10 |
+|        Sideways |     0.20 |           0.60 |          0.20 |
+| High Volatility |     0.10 |           0.20 |          0.70 |
+
+### 5. Portfolio Construction
+
+Portfolio return:
+
+[
+R_t = \sum_{i=1}^{N} w_{i,t} r_{i,t}
+]
+
+Where:
+
+* (R_t): Portfolio return at time (t)
+* (w_{i,t}): Weight of strategy (i)
+* (r_{i,t}): Return of strategy (i)
+
+### 6. Performance Evaluation
+
+The combined portfolio is benchmarked against buy-and-hold using risk-adjusted metrics.
+
+---
+
+## Example Performance Metrics
+
+|        Metric | Regime-Aware Portfolio | Buy & Hold |
+| ------------: | ---------------------: | ---------: |
+|          CAGR |                  18.4% |      11.2% |
+|  Sharpe Ratio |                   1.62 |       0.89 |
+| Sortino Ratio |                   2.35 |       1.21 |
+|  Max Drawdown |                  -9.8% |     -22.4% |
+|  Calmar Ratio |                   1.88 |       0.50 |
+
+> These are illustrative results. Actual performance depends on market data and assumptions.
+
+---
 
 ## Installation
 
 ```bash
+git clone https://github.com/shprite21/quant-trading.git
+cd quant-trading/regime-aware-multi-strategy-backtesting
+
 python -m venv .venv
-.venv\Scripts\activate
+source .venv/bin/activate        # Mac/Linux
+# .venv\Scripts\activate         # Windows
+
 pip install -r requirements.txt
 ```
 
+---
+
 ## Usage
 
-Run the full experiment from the repository root:
+Run the full experiment pipeline:
 
 ```bash
 python experiments/run_experiment.py
 ```
 
-Optionally point to a custom config:
+Open Jupyter notebooks:
 
 ```bash
-python experiments/run_experiment.py --config experiments/config.yaml
+jupyter notebook
 ```
 
-## Workflow
+Run unit tests:
 
-1. Download and cache daily price data.
-2. Clean prices and compute research features.
-3. Generate strategy positions.
-4. Fit the Gaussian HMM and infer market regimes.
-5. Map inferred regimes to strategy capital weights.
-6. Backtest the dynamically allocated portfolio.
-7. Compute metrics and save reports.
-8. Review figures and notebooks for analysis.
+```bash
+pytest tests/
+```
 
-## Example Outputs
+---
 
-Running the experiment produces:
+## Technologies Used
 
-- `outputs/figures/equity_curve.png`
-- `outputs/figures/drawdown.png`
-- `outputs/figures/rolling_sharpe_63d.png`
-- `outputs/figures/regime_classification.png`
-- `outputs/figures/strategy_cumulative_returns.png`
-- `outputs/figures/transition_matrix_heatmap.png`
-- `outputs/reports/performance_metrics.csv`
-- `outputs/reports/daily_results.csv`
-- `outputs/reports/performance_dashboard.html`
+### Programming
 
-## Configuration
+* Python
+* NumPy
+* pandas
 
-The main experiment settings live in `experiments/config.yaml` and include:
+### Quantitative Finance
 
-- Tickers and benchmark
-- Date range
-- Strategy parameters
-- HMM parameters
-- Transaction cost assumptions
-- Output locations
+* statsmodels
+* arch
 
-## Research Notebooks
+### Machine Learning
 
-The notebook suite is intended for exploratory analysis and presentation:
+* hmmlearn
+* scikit-learn
 
-- `01_data_exploration.ipynb`
-- `02_strategy_research.ipynb`
-- `03_regime_detection.ipynb`
-- `04_results_analysis.ipynb`
+### Visualization
+
+* matplotlib
+* seaborn
+
+### Testing
+
+* pytest
+
+---
 
 ## Skills Demonstrated
 
-- Quantitative research workflow design
-- Time-series preprocessing and feature engineering
-- Strategy signal modeling
-- Market regime detection with probabilistic models
-- Portfolio construction and backtesting
-- Performance analytics and visualization
-- Python software engineering, testing, and reproducibility
+* Quantitative research
+* Time series analysis
+* Hidden Markov Models
+* Statistical arbitrage
+* Portfolio construction
+* Backtesting
+* Risk management
+* Software engineering
+* Data visualization
 
-## Relevance for MFE Applications
+---
 
-This project highlights the blend of statistical modeling, portfolio construction, and production-style engineering expected in financial engineering programs and quantitative internships. It demonstrates:
+## Resume Bullet
 
-- Practical use of latent-state models in asset allocation
-- Implementation of systematic strategies with realistic execution assumptions
-- Familiarity with financial performance diagnostics
-- Ability to turn research ideas into reusable software
+> Built a regime-aware multi-strategy quantitative trading platform combining momentum, mean reversion, and pairs trading strategies with Hidden Markov Model market state detection, dynamic capital allocation, and risk analytics including Sharpe ratio and maximum drawdown.
+
+---
+
+## Future Enhancements
+
+* Walk-forward optimization
+* Bayesian hyperparameter tuning
+* Reinforcement learning allocator
+* Live paper trading integration
+* Docker containerization
+* CI/CD with GitHub Actions
+
+---
 
 ## References
 
-- Hamilton, J. D. (1989). A New Approach to the Economic Analysis of Nonstationary Time Series and the Business Cycle.
-- Rabiner, L. R. (1989). A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition.
-- `hmmlearn` documentation
-- `statsmodels` documentation
-- Yahoo Finance market data via `yfinance`
+* Quantitative Trading — Ernest Chan
+* Advances in Financial Machine Learning — Marcos López de Prado
+* Machine Learning for Asset Managers — Marcos López de Prado
 
-## Notes
+---
 
-- The experiment uses one-day signal shifting to avoid look-ahead bias.
-- Transaction costs default to 5 basis points per unit of turnover.
-- If Yahoo Finance access is unavailable, the loader falls back to cached raw data when present.
+## Disclaimer
+
+This project is for educational and research purposes only and does not constitute financial advice.
+
+---
+
+## Author
+
+**Arnaav Raj**
+
+* GitHub: [https://github.com/shprite21](https://github.com/shprite21)
+* LinkedIn: [https://www.linkedin.com/in/arnaav-raj-75232b28a/](https://www.linkedin.com/in/arnaav-raj-75232b28a/)
+
