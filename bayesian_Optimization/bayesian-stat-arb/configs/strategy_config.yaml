@@ -1,0 +1,58 @@
+data:
+  tickers: ["XLE", "VDE", "IYE"]
+  start: "2015-01-01"
+  end: null
+  missing_policy: "ffill_drop"
+  forward_fill_limit: 5
+  min_history: 504
+
+cointegration:
+  significance_level: 0.05
+  use_log_prices: true
+  min_obs: 252
+  run_johansen: true
+  johansen_det_order: 0
+  johansen_k_ar_diff: 1
+
+spread:
+  use_log_prices: true
+  shift_statistics: true
+
+validation:
+  train_fraction: 0.70
+
+backtest:
+  initial_capital: 1000000
+  transaction_cost_bps: 1.0
+  slippage_bps: 1.0
+
+metrics:
+  annualization_factor: 252
+  risk_free_rate: 0.0
+
+optimizer:
+  n_trials: 75
+  random_seed: 42
+  validation_fraction: 0.35
+  weight_low: -2.0
+  weight_high: 2.0
+  entry_low: 1.0
+  entry_high: 3.0
+  exit_low: 0.05
+  exit_high: 1.0
+  rolling_window_low: 20
+  rolling_window_high: 120
+  position_size_low: 0.25
+  position_size_high: 1.50
+  min_validation_trades: 2
+
+walk_forward:
+  enabled: false
+  train_size: 756
+  test_size: 126
+  step_size: 126
+  n_trials: 25
+
+logging:
+  level: "INFO"
+
