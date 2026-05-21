@@ -311,15 +311,11 @@ pytest tests/
 
 ---
 
-## Disclaimer
+
 
 This project is for educational and research purposes only and does not constitute financial advice.
 
 ---
 
-## Author
-
 **Arnaav Raj**
 
-* GitHub: [https://github.com/shprite21](https://github.com/shprite21)
-* LinkedIn: [https://www.linkedin.com/in/arnaav-raj-a2561427b/](https://www.linkedin.com/in/arnaav-raj-a2561427b/)
