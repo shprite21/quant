@@ -331,6 +331,7 @@ python main.py
 8. Analyze robustness and parameter stability
 
 ---
+
 ## Outputs
 
 The pipeline saves:
@@ -352,5 +353,10 @@ The pipeline saves:
 - `results/figures/optimization_history.png`
 - `results/figures/parameter_importance.png`
 
+---
 
 This project is intended for educational and research purposes only.
+
+---
+
+**Arnaav Raj**
