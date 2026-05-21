@@ -1,4 +1,4 @@
-# Project A — Regime-Aware Multi-Strategy Backtesting System
+# Regime-Aware Multi-Strategy Backtesting System
 
 A professional-grade quantitative research platform that combines multiple trading strategies with Hidden Markov Model (HMM) based market regime detection.
 
