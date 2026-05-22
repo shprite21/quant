@@ -1,0 +1,18 @@
+{
+  "cpp": {
+    "available": false,
+    "checksum": 0.0,
+    "elapsed_seconds": 0.0,
+    "engine": "cpp",
+    "error": "No compatible C++ compiler found on PATH",
+    "options": 200000.0,
+    "options_per_second": 0.0
+  },
+  "python": {
+    "checksum": 2497212.3267573733,
+    "elapsed_seconds": 0.4365393999905791,
+    "engine": "python",
+    "options": 200000.0,
+    "options_per_second": 458148.79482657503
+  }
+}

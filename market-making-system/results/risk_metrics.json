@@ -1,0 +1,14 @@
+{
+  "average_step_pnl": 5.100811048732708,
+  "final_option_inventory": 20.0,
+  "final_stock_position": -578.2804108995211,
+  "max_abs_inventory": 60.0,
+  "max_abs_net_delta": 14.950103346694732,
+  "max_drawdown": -88.56145502315485,
+  "mean_abs_hedge_error": 1.58098875569591,
+  "pnl_volatility": 12.065479837259321,
+  "realized_volatility_last": 0.23008503461607813,
+  "realized_volatility_mean": 0.21536527761269378,
+  "sharpe_ratio": 14.35026625731646,
+  "total_pnl": 3983.733429060245
+}
