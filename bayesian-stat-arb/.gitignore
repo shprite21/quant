@@ -6,7 +6,6 @@ venv/
 
 data/raw/*.csv
 data/processed/*.csv
-results/figures/*.png
 results/performance_reports/*.csv
 results/performance_reports/*.json
 results/optimization_logs/*.csv

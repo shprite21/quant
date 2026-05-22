@@ -18,7 +18,6 @@ env/
 # Data and generated outputs
 data/raw/*.csv
 data/processed/*.csv
-outputs/figures/*.png
 outputs/reports/*.csv
 outputs/reports/*.html
 
