@@ -1,0 +1,34 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.streamlit/
+
+# Local project dependencies and caches
+.python_packages/
+.cache/
+
+# Logs and local metadata
+*.log
+Thumbs.db
+.DS_Store
+
+# Generated ML outputs
+figures/
+processed_dataset.csv
+comparison_results.csv
+test_predictions.csv
+random_forest_feature_importance.csv
+xgboost_feature_importance.csv
